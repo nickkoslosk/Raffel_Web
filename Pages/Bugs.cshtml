@@ -1,0 +1,24 @@
+﻿@page
+@model Raffel_Web.Pages.Shared.BugsModel
+@using Microsoft.AspNetCore.Identity
+@using Raffel_Web.Areas.Identity.Data
+@inject SignInManager<Raffel_WebUser> SignInManager
+@inject UserManager<Raffel_WebUser> UserManager
+@{
+    ViewData["Title"] = "Bugs";
+}
+
+<h1>Report Bugs</h1>
+<br />
+<h3>Known Bugs:</h3>
+
+
+    completed project search redirects to index page <br />
+    <br />
+    <h3>New Bug Report Form</h3>
+    <form method="post">
+        <label asp-for="Message.Subject">Username</label> <input type="text" asp-for="Message.Subject" value=@UserManager.GetUserName(User) readonly /><br>
+        <textarea asp-for="Message.Body" rows="10" cols="80" placeholder="write your error in detail here"></textarea><br>
+        <input type="submit" onclick="return alert('Thank you for your submission');" asp-page="/Bugs"/>
+    </form>
+

@@ -1,0 +1,86 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.ScopeAndRev.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Request for Samples or New Product Scope</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Scope.LEAD_NUMBER" class="control-label"></label>
+                <input asp-for="Scope.LEAD_NUMBER" type="text" value=@Model.LEAD readonly />
+                @*<input asp-for="Scope.LEAD_NUMBER" class="form-control">*@
+                <span asp-validation-for="Scope.LEAD_NUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.ORIGINAL_SCOPE" class="control-label"></label>
+                <input asp-for="Scope.ORIGINAL_SCOPE" class="form-control" />
+                <span asp-validation-for="Scope.ORIGINAL_SCOPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.DATE_ENTERED" class="control-label"></label>
+                <input asp-for="Scope.DATE_ENTERED"  type="text" value="@DateTime.Now" readonly />
+                <span asp-validation-for="Scope.DATE_ENTERED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.FIRST_DELIVERABLE" class="control-label"></label>
+                <select asp-for="Scope.FIRST_DELIVERABLE" asp-items="Model.deliverables"></select>
+                <span asp-validation-for="Scope.FIRST_DELIVERABLE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.WHERE_SEND" class="control-label"></label>
+                <input asp-for="Scope.WHERE_SEND" class="form-control" />
+                <span asp-validation-for="Scope.WHERE_SEND" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.DATE_NEEDED" class="control-label"></label>
+                <input asp-for="Scope.DATE_NEEDED" class="form-control" />
+                <span asp-validation-for="Scope.DATE_NEEDED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.SCOPE_ORIGINATOR" class="control-label"></label>
+                <input asp-for="Scope.SCOPE_ORIGINATOR" class="form-control" />
+                <span asp-validation-for="Scope.SCOPE_ORIGINATOR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CUSTOMER_SCOPE" class="control-label"></label>
+                <input asp-for="Scope.CUSTOMER_SCOPE" class="form-control" />
+                <span asp-validation-for="Scope.CUSTOMER_SCOPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.PRODUCT_TYPE" class="control-label"></label>
+                <input asp-for="Scope.PRODUCT_TYPE" class="form-control" />
+                <span asp-validation-for="Scope.PRODUCT_TYPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.SIMILAR_TO" class="control-label"></label>
+                <input asp-for="Scope.SIMILAR_TO" class="form-control" />
+                <span asp-validation-for="Scope.SIMILAR_TO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CONNECTIONS" class="control-label"></label>
+                <input asp-for="Scope.CONNECTIONS" class="form-control" />
+                <span asp-validation-for="Scope.CONNECTIONS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

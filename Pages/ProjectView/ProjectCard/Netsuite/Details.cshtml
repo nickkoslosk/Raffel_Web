@@ -1,0 +1,83 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.Netsuite.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<p>
+    <a asp-route-LEAD_NUMBER="@Model.NetsuiteEntry.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-dark btn-outline-info btn-sm">Home</a>
+    <a asp-route-LEAD_NUMBER="@Model.NetsuiteEntry.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+    <a asp-route-LEAD_NUMBER="@Model.NetsuiteEntry.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-secondary btn-sm">Scope and Rev</a>
+
+</p>
+
+<div>
+    <h4>NetsuiteEntry</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.LEAD_NUMBER)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.LEAD_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PART_SUB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PART_SUB)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.MANUFACTURER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.MANUFACTURER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.MFG_COST)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.MFG_COST)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PRICE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PRICE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.LAST_UPDATE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.LAST_UPDATE)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.SALES_DES)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.SALES_DES)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PURCHASE_INFO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PURCHASE_INFO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.SUB_BY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.SUB_BY)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.NetsuiteEntry.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,40 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.ScopeAndRev.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Scope</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.LEAD_NUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.LEAD_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.ORIGINAL_SCOPE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.ORIGINAL_SCOPE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.DATE_ENTERED)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.DATE_ENTERED)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Scope.LEAD_NUMBER" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index" asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER">Back to List</a>
+    </form>
+</div>

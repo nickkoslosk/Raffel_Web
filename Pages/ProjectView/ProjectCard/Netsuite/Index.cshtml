@@ -1,0 +1,114 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.Netsuite.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>New Part Number</h1>
+
+<p>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-secondary btn-sm">Home</a>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-secondary btn-sm">Scope and Rev</a>
+
+</p>
+
+<p>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="./Create" class="btn btn-info btn-sm">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].LEAD_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.project.PART_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].PART_SUB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].MANUFACTURER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].MFG_COST)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].PRICE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].LAST_UPDATE)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].SALES_DES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].PURCHASE_INFO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetsuiteEntry[0].SUB_BY)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.NetsuiteEntry) {
+        <tr>
+            <td>
+             @*going to have to be a post form so that the email can get sent*@
+                <button class="btn btn-primary btn-sm" type="submit" onclick="changeStatus(); return confirm('Are you sure you want to Submit for approval?');">
+                    Submit
+                </button>
+             
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LEAD_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.project.PART_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PART_SUB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MANUFACTURER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MFG_COST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRICE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAST_UPDATE)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SALES_DES)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PURCHASE_INFO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SUB_BY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm">Edit</a>
+
+                @* <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

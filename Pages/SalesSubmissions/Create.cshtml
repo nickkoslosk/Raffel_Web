@@ -1,0 +1,117 @@
+﻿@page
+@model Raffel_Web.Pages.SalesSubmissions.CreateModel
+@using Microsoft.AspNetCore.Identity
+@using Raffel_Web.Areas.Identity.Data
+@inject SignInManager<Raffel_WebUser> SignInManager
+@inject UserManager<Raffel_WebUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Request for Samples or New Product Scope</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="Scope.LEAD_NUMBER" class="control-label"></label>*@
+                <input asp-for="Scope.LEAD_NUMBER" value="L170000" readonly hidden />
+                <input asp-for="Project.LEAD_NUMBER" value="L170000" readonly hidden />
+         
+                <span asp-validation-for="Scope.LEAD_NUMBER" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Scope.ORIGINAL_SCOPE" class="control-label"></label>
+                <textarea asp-for="Scope.ORIGINAL_SCOPE" rows="10" cols="80" class="form-control"> </textarea>
+                <span asp-validation-for="Scope.ORIGINAL_SCOPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.PROJECT_NAME" class="control-label"></label>
+                <input asp-for="Project.PROJECT_NAME" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Project.LEAD_NUMBER" value="@Model.nextLead" hidden />
+            </div>
+            <div class="form-group">
+                <input asp-for="Project.PRIORITY"  value="Backlog/Cue" hidden />
+            </div>
+            <div class="form-group">
+                <input asp-for="Project.EE_LEAD" value="Not Assigned" hidden />
+            </div>
+            <div class="form-group">
+                <input asp-for="Project.ME_LEAD" value="Not Assigned" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.DATE_ENTERED" class="control-label"></label>
+                <input asp-for="Scope.DATE_ENTERED" type="text" value="@DateTime.Now" readonly />
+                <span asp-validation-for="Scope.DATE_ENTERED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.FIRST_DELIVERABLE" class="control-label"></label>
+                <select asp-for="Scope.FIRST_DELIVERABLE" asp-items="Model.deliverables"></select>
+                <span asp-validation-for="Scope.FIRST_DELIVERABLE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.WHERE_SEND" class="control-label"></label>
+                <input asp-for="Scope.WHERE_SEND" class="form-control" />
+                <span asp-validation-for="Scope.WHERE_SEND" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.DATE_NEEDED" class="control-label"></label>
+                <input asp-for="Scope.DATE_NEEDED" class="form-control" />
+                <span asp-validation-for="Scope.DATE_NEEDED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.SCOPE_ORIGINATOR" class="control-label"></label>
+                <input asp-for="Scope.SCOPE_ORIGINATOR" type="text" value=@UserManager.GetUserName(User) readonly />
+                <span asp-validation-for="Scope.SCOPE_ORIGINATOR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CUSTOMER_SCOPE" class="control-label"></label>
+                <select asp-for="Scope.CUSTOMER_SCOPE" asp-items="Model.customers"></select>
+                <span asp-validation-for="Scope.CUSTOMER_SCOPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.PRODUCT_TYPE" class="control-label"></label>
+                <input asp-for="Scope.PRODUCT_TYPE" class="form-control" />
+                <span asp-validation-for="Scope.PRODUCT_TYPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.SIMILAR_TO" class="control-label"></label>
+                <input asp-for="Scope.SIMILAR_TO" class="form-control" />
+                <span asp-validation-for="Scope.SIMILAR_TO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CONNECTIONS" class="control-label"></label>
+                <textarea asp-for="Scope.CONNECTIONS" class="form-control"></textarea>
+                <span asp-validation-for="Scope.CONNECTIONS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.EAU" class="control-label"></label>
+                <input asp-for="Scope.EAU" class="form-control"/>
+                <span asp-validation-for="Scope.EAU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.TARGET_PRICE" class="control-label"></label>
+                <input asp-for="Scope.TARGET_PRICE" class="form-control"/>
+                <span asp-validation-for="Scope.TARGET_PRICE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" onclick="return confirm('are you sure you want to create a new scope?');" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Index">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

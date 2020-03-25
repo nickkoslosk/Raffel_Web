@@ -1,0 +1,77 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.Netsuite.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>NetsuiteEntry</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.LEAD_NUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.LEAD_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PART_SUB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PART_SUB)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.MFG_COST)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.MFG_COST)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PRICE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PRICE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.LAST_UPDATE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.LAST_UPDATE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.MANUFACTURER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.MANUFACTURER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.SALES_DES)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.SALES_DES)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.PURCHASE_INFO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.PURCHASE_INFO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NetsuiteEntry.SUB_BY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NetsuiteEntry.SUB_BY)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="NetsuiteEntry.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

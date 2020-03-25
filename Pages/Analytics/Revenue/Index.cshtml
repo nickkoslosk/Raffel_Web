@@ -1,0 +1,96 @@
+﻿@page
+@model Raffel_Web.RevenueModel
+
+@{
+    ViewData["Title"] = "ES.Rev.";
+}
+
+<h1>Estimated Revenue</h1>
+<p>
+   
+    <a asp-page="/Analytics/Revenue/index" style="background-color: #C2DAE7;" class="btn btn-dark btn-outline-info btn-sm">Estimated Revenue</a>
+    <a asp-page="/Analytics/Revisions/index" style="background-color: #C2DAE7;" class="btn btn-sm">Open Revisions</a>
+    <a asp-page="/Analytics/Netsuite/index" style="background-color: #C2DAE7;" class="btn btn-sm">Open Netsuite Entries</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].EAR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].LEAD_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].PROJECT_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].PART_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].PRIORITY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].CUSTOMER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].DELIVERABLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].COMMIT_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].EE_LEAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].ME_LEAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revenue[0].SALESMAN)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RevenueIQ) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EAR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LEAD_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROJECT_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PART_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRIORITY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUSTOMER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DELIVERABLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COMMIT_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EE_LEAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ME_LEAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SALESMAN)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,87 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.Netsuite.EditModel
+@using Microsoft.AspNetCore.Identity
+@using Raffel_Web.Areas.Identity.Data
+@inject SignInManager<Raffel_WebUser> SignInManager
+@inject UserManager<Raffel_WebUser> UserManager
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>NetsuiteEntry</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="NetsuiteEntry.Id" />
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.LEAD_NUMBER" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.LEAD_NUMBER" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.LEAD_NUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.PART_SUB" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.PART_SUB" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.PART_SUB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.MFG_COST" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.MFG_COST" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.MFG_COST" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.PRICE" class="control-label"></label>
+                @if (ViewContext.HttpContext.User.IsInRole("Manager"))
+                {
+                    <input asp-for="NetsuiteEntry.PRICE" class="form-control"  />
+                }
+                else
+                {
+                    <input asp-for="NetsuiteEntry.PRICE" class="form-control" readonly />
+                }
+
+                <span asp-validation-for="NetsuiteEntry.PRICE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.LAST_UPDATE" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.LAST_UPDATE" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.LAST_UPDATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.MANUFACTURER" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.MANUFACTURER" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.MANUFACTURER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.SALES_DES" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.SALES_DES" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.SALES_DES" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.PURCHASE_INFO" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.PURCHASE_INFO" class="form-control" />
+                <span asp-validation-for="NetsuiteEntry.PURCHASE_INFO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetsuiteEntry.SUB_BY" class="control-label"></label>
+                <input asp-for="NetsuiteEntry.SUB_BY" class="form-control" readonly />
+                <span asp-validation-for="NetsuiteEntry.SUB_BY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index" asp-route-LEAD_NUMBER="@Model.NetsuiteEntry.LEAD_NUMBER">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

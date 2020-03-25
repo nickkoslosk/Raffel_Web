@@ -1,0 +1,70 @@
+﻿@page
+@model Raffel_Web.Areas.Identity.Pages.RoleManagement.IndexModel
+@{
+
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>
+                    Username
+                </th>
+                <th>
+                    Phone number
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Last Login
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @*
+        @foreach (var item in (from i1 in Model.users
+                               group i1 by i1.UserName  into i3
+                               from i2 in Model.roles
+                               select Tuple.Create(i3, i2)))
+            *@
+            @foreach (var item in (from i1 in Model.users
+                                  
+                                   from i2 in Model.roles
+                                   select Tuple.Create(i1, i2)))
+            {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1.Name)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Item2)
+
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Item1.Id" class="btn btn-success btn-sm">Edit</a>
+
+                    @* <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+
+}

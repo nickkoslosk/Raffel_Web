@@ -1,0 +1,82 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.ScopeAndRev.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+    <h1>Scope And Revision</h1>
+    <p>
+        <a asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-success btn-sm">Home</a>
+        @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+        {
+            @if (Model.PN == "")
+            {
+                <asp:button runat="server" class="btn btn-secondary btn-sm" onclick="return alert('You must have a part number');">Netsuite</asp:button>
+
+            }
+            else
+            {
+                <a asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+            }
+        }
+            <a asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-dark btn-sm">Scope and Rev</a>
+            <!--    <a asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/NoteHistory/Index" class="btn btn-success btn-sm">Notes</a>-->
+        </p>
+    <h2>Scope:  @Html.DisplayFor(model => model.Scope.ORIGINAL_SCOPE) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   Date Entered:  @Html.DisplayFor(model => model.Scope.DATE_ENTERED)</h2>
+
+<hr />
+<h2>Revisions</h2>
+@*
+<div>
+    <h4>Scope</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.LEAD_NUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.LEAD_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.ORIGINAL_SCOPE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.ORIGINAL_SCOPE)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.DATE_STARTED)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.DATE_STARTED)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Revision.REV_DETAILS)
+        </dt>
+        <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Revision.REV_DETAILS) 
+           
+        </dd>
+        <dd class="col-sm-5">
+            <a align="right" asp-route-LEAD_NUMBER=@Model.Scope.LEAD_NUMBER asp-page="/ProjectView/ProjectCard/ScopeAndRev/Revisions/Index" class="btn btn-secondary btn-sm">Revisions</a>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.DATE_COMPLETE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.DATE_COMPLETE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Scope.COMPLETE_BY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Scope.COMPLETE_BY)
+        </dd>
+    </dl>
+</div>
+    *@
+<div>
+    <a asp-page="./Edit" asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER">Edit</a> |
+    <a asp-page="./Index"asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER">Back to List</a>
+</div>

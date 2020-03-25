@@ -1,0 +1,154 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.ScopeAndRev.IndexModel
+
+@{
+    ViewData["Title"] = "Request for Samples or New Product Scope";
+}
+
+<h1>Scope And Revision</h1>
+<p>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-secondary btn-sm">Home</a>
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        @if (Model.PN == "" || Model.PN == null)
+        {
+            <asp:button runat="server" class="btn btn-secondary btn-sm" onclick="return alert('You must have a part number');">Netsuite</asp:button>
+
+        }
+        else
+        {
+            <a asp-route-LEAD_NUMBER="@Model.LEAD" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+        }
+    }
+
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-dark btn-outline-info btn-sm">Scope and Rev</a>
+    <!-- <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/NoteHistory/Index" class="btn btn-secondary btn-sm">Notes</a> -->
+</p>
+
+@if (Model.Scope == null)
+{
+    <p>
+        <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="./Create" class="btn btn-info btn-sm">Create New Scope</a>
+    </p>
+}
+else
+{
+    <h6><strong>Original Scope:</strong>  </h6> <h6>@Html.DisplayFor(model => model.Scope.ORIGINAL_SCOPE)</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.FIRST_DELIVERABLE): @Html.DisplayFor(model => model.Scope.FIRST_DELIVERABLE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.DATE_ENTERED): @Html.DisplayFor(model => model.Scope.DATE_ENTERED)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.EAU): @Html.DisplayFor(model => model.Scope.EAU)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.WHERE_SEND): @Html.DisplayFor(model => model.Scope.WHERE_SEND)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.DATE_NEEDED): @Html.DisplayFor(model => model.Scope.DATE_NEEDED)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.TARGET_PRICE): @Html.DisplayFor(model => model.Scope.TARGET_PRICE)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.SCOPE_ORIGINATOR): @Html.DisplayFor(model => model.Scope.SCOPE_ORIGINATOR)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.CUSTOMER_SCOPE): @Html.DisplayFor(model => model.Scope.CUSTOMER_SCOPE)
+                </th>
+                <th>
+                    Estimated Annual Revenue: @Model.EAR
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.PRODUCT_TYPE): @Html.DisplayFor(model => model.Scope.PRODUCT_TYPE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.SIMILAR_TO) @Html.DisplayFor(model => model.Scope.SIMILAR_TO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scope.CONNECTIONS): @Html.DisplayFor(model => model.Scope.CONNECTIONS)
+                </th>
+            </tr>
+        </thead>
+        </table>
+                <a asp-page="./Edit" asp-route-LEAD_NUMBER="@Model.LEAD" class="btn btn-success btn-sm">Edit</a>
+
+            <h2>Revisions</h2>
+
+            <p>
+                <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="./Revisions/Create" class="btn btn-info btn-sm">Create New Revision</a>
+            </p>
+
+
+            @if (Model.Revision.Count() > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Revision[0].DATE_ENTERED)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Revision[0].REV_DETAILS)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Revision[0].COMPLETE_BY)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Revision[0].DATE_COMPLETE)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Revision)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DATE_ENTERED)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.REV_DETAILS)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.COMPLETE_BY)
+                                </td>
+
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DATE_COMPLETE)
+                                </td>
+                                <td>
+                                    <a asp-page=".Revisions/Edit" asp-route-LEAD_NUMBER="@item.LEAD_NUMBER" class="btn btn-success btn-sm">Edit</a>
+                                    @* <a asp-page="./Details" asp-route-LEAD_NUMBER="@item.LEAD_NUMBER" class="btn btn-primary btn-sm">Details</a>
+                                        <a asp-page="./Delete" asp-route-id="@item.LEAD_NUMBER">Delete</a>    <!--MUST USE ID otherwise deletion will remove all records -->*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+ }
+            else
+            {
+                <p>
+                    No Revisions
+                </p>
+            }
+
+            }
+
+
+            

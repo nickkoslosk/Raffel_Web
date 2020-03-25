@@ -1,0 +1,207 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.Home.DetailsModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p>
+    <a asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-dark btn-outline-info btn-sm">Home</a>
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        @if (Model.Projects.PART_NUMBER == ""|| Model.Projects.PART_NUMBER == null)
+        {
+            <asp:button runat="server" class="btn btn-secondary btn-sm" onclick="return alert('You must have a part number');">Netsuite</asp:button>
+
+        }
+        else
+        {
+            <a asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+        }
+    }
+    <a asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-secondary btn-sm">Scope and Rev</a>
+
+</p>
+
+<div>
+    <h4>Projects</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.LEAD_NUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.LEAD_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.PROJECT_NAME)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.PROJECT_NAME)
+        </dd>
+        <dt class="col-sm-2">
+            Estimated Annual Revenue
+        </dt>
+        <dd class="col-sm-10">
+            @string.Format("{0:C}", @Model.EAR)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.PART_NUMBER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.PART_NUMBER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.DATE_STARTED)
+        </dt>
+        @{
+            var dateColor = "";
+            var initDate = new DateTime(1900, 01, 01);
+            var dt = @Model.Projects.DATE_STARTED ?? DateTime.Now;
+            var result = DateTime.Compare(initDate, dt);
+        }
+        @if (initDate == dt)
+        {
+            dateColor = "color:Blue";
+        }
+
+        @if (result > 1)
+        {
+            dateColor = "color:Blue";
+        }
+
+        <dd style="@dateColor" class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.DATE_STARTED)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.PRIORITY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.PRIORITY)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.CUSTOMER)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.CUSTOMER)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.DELIVERABLE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.DELIVERABLE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.COMMIT_DATE)
+        </dt>
+        @{
+            dateColor = "";
+            var nullcheck = @Model.Projects.COMMIT_DATE;
+            dt = @Model.Projects.COMMIT_DATE ?? DateTime.Now;
+            result = DateTime.Compare(DateTime.Now, dt);
+        }
+        @if (nullcheck == null)
+        {
+            dateColor = "White";
+        }
+        else
+        {
+            @if (result < 1)
+            {
+                @*dateColor="color:green";*@
+            }
+            else
+            {
+                dateColor = "color:Red";
+            }
+        }
+        <dd style="@dateColor" class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.COMMIT_DATE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.EE_LEAD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.EE_LEAD)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.ME_LEAD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.ME_LEAD)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.ALPHA_DATE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.ALPHA_DATE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.BETA_DATE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.BETA_DATE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.FILES_TO_MANUFACTURE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.FILES_TO_MANUFACTURE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.PPAP_RCVD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.PPAP_RCVD)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.TOOLING_RELEASED)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.TOOLING_RELEASED)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.TOOLING_COMPLETE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.TOOLING_COMPLETE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Projects.SALESMAN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.SALESMAN)
+        </dd>
+        <dt class="col-sm-2">
+            Last Edited by
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Projects.USERNAME)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lastNote)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.lastNote)
+        </dd>
+
+
+    </dl>
+    <a asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/NoteHistory/Index" class="btn btn-primary btn-sm">Note History</a> |
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        <a asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/NoteHistory/Create" class="btn btn-primary btn-sm">Create new Note</a>
+    }
+    </div>
+<br />
+<div>
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        <a asp-page="./Edit" asp-route-LEAD_NUMBER="@Model.Projects.LEAD_NUMBER" class="btn btn-success btn-sm">Edit</a>
+        <a asp-page="/ProjectView/Index">Back to List</a> <!-- send back to project list-->
+    }
+    </div>

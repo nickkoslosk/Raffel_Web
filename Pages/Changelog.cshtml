@@ -1,0 +1,281 @@
+﻿@page
+@model Raffel_Web.Pages.ChangelogModel
+@{
+    ViewData["Title"] = "Changelog";
+}
+
+<h1>Version History</h1>
+<div class="text-center">
+    <h3>Current Version:</h3>
+</div>
+<div>
+    <p>
+        V0.7.0: Basic framework for analytics page added. Estimated revenue page added <br />
+                edit projects: added Mo and Song as choice in salesman dropdown <br />
+                added open netsuite and open rev  pages in analytics(beta) <br />
+                when submitting a new scope originator first leter is now capitilized <br />
+                project list: when a project is reassigned it will email the EE lead it is assigned to <br />
+                new rev: when a revision is created it will email the EE lead on that project
+                
+
+    </p>
+
+
+</div>
+<p>
+    <h2 class="display-4">Upcoming changes</h2>
+
+    -addition of approval checkbox on netsuite details form<br />
+    -sidebar that will display certain options including a "To be approved" option that will be highlighted<br />
+    if there are pending approvals<br />
+    -price will be determined by algorithm<br />
+    -netsuite render drop box <br />
+    -renders moved to s: drive when project completed <br />
+    -netsuite email for approval <br />
+    -role edit page for managers and supervisors. <br />
+    -revisions edit page <br />
+    -netsuite: new string to determine submission status <br />
+    -recover password feature <br />
+    -other assorted user account features <br />
+    -(possible, requires further research) user preferences for project list index page
+    on first entry and return from details. <br />
+    -ability to add a render under new scope <br />
+    -note max render size on render drops
+
+
+
+
+
+</p>
+<div class="text-center">
+    <h3>Previous Versions:</h3>
+</div>
+<br />
+<p>
+    V0.6.8: removed from the nearest dollar for EAU <br />
+    new Rev: now sends an email to supervisiors and managers <br />
+    added migration for scope. EAU and target price re now doubles <br />
+
+</p>
+<br />
+<p>
+    V0.6.7: When moving a project to completed, hold, or graveyard the commit date is set to that day.<br />
+    side project lists: completed- commit date is now completed date. removed colors<br />
+    side project lists: hold- commit date is now Put on Hold. removed colors<br />
+    side project lists: graveyard- commit date is now graveyard date. removed colors<br />
+    New Scope: specified that EAU and sell price must be to the nearest dollar and now only accept numbers <br />
+    Scope and rev: target price became Estimated annual revenue <br />
+    project list details: added estimated annual revenue <br />
+    netsuite: Managers have the ability to change the price on a netsuite entry on the edit page. <br />
+
+</p>
+<br />
+<p>
+    V0.6.6: Scope and rev: changes to format for easier reading <br />
+    Home page: added graphic <br />
+    Netsuite: fixed bug allowing entry into netsuite page with no part number <br />
+    Project list: sorting is now available on customer and salesperson as well as eelead and priority <br />
+    project list: added sales person field <br />
+    Privacy policy: Added <br />
+    Create new scope and edit project: dropdown list added for customer <br />
+    Project list: added a graveyard tab that contains inactive projects <br />
+    added sorting for all fields on project list <br />
+    Project list: projects on hold appear in thier own list <br />
+    Project list: added /clear to submit filter button for clarity. <br />
+    Dropdown lists: added blank defaults to dropdown lists <br />
+    New scope: sligh change to email format
+</p>
+<br />
+<p>
+    V0.6.5 project list: Note button added for each entry that displays the most recent note in a modal pop-up <br />
+    Project List: create new project button active for engineers. goes to new scope. <br />
+    New Scope: creating a new scope now populates sales person, customer, and deliverable in the project entry <br />
+    Bug Report: added Authorization <br />
+    Bug Report: Entry now tied to username <br />
+    Suggestions: added Authorization <br />
+    Suggestions: Entry now tied to username <br />
+    Project List: managers and supervisors can now edit LeadNumbers <br />
+    Navigation: moved to added collapsible sidebar <br />
+    Project list: added customer to index page <br />
+    Netsuite entry: entry creation tied to username <br />
+    Netsuite entry: render drop added (currently non functional) <br />
+    role edit page: created (non-functioning) <br />
+    added privacy policy. <br />
+    pending page added (non-functioning)
+</p>
+<br />
+<p>
+    V0.6.4 project list: dual sorting now possible on project list
+</p>
+<br />
+<p>
+    V0.6.3 changes added to note, scope, and revision models. <br />
+    scope: deliverable is now a dropdown with pre-selected items. <br />
+    scope: edit page is now complete. <br />
+    inactivity timeout increased to 15 minutes <br />
+    creating a new scope now sends an email to the creator with full details of the scope in the body of the email. <br />
+    role auth: complete for field sales role
+    revision: removed completed by and completed by date from creation <br />
+    revision: added entered by field that auto populates <br />
+    scope: added third column to scope page with EAU, target price, and calculated annual revenue.
+</p>
+<br />
+<p>
+    V0.6.2 Create new scope: an email is sent to the person creating it with info about the project
+    Edit projects: last edited by is automatically tied to the person editing the project
+
+
+</p>
+<br />
+<p>
+    V0.6.1   Role based authorization started.
+</p>
+<br />
+<p>
+    V0.5.3 various bugfixes <br />
+    homepage: confirmation for log out required <br />
+    header added to site with raffel logo and colors <br />
+    site main page title updated. <br />
+    netsuite index: added part number to the index table <br />
+    changed buttons to be more apealing
+
+
+</p>
+<br />
+
+<p>
+    V0.5.2 Authorization started, login required for access to main pages <br />
+</p>
+<br />
+<p>
+    V0.5.1 Raffel web moved to its new and final hosted location! <br />
+    project card: username changed to last edited by <br />
+    project list and details: removed the filler dates for all but date started. Filler <br />
+    dates will appear in blue for this column. <br />
+    create note: note description changed to a larger box. <br />
+    Netsuite tab: If no part number exists an alert notifies you and page cannot be accessed. <br />
+    this works for all pages <br />
+    Netsuite creation page: Price removed. <br />
+    Netsuite creation page: part number now pulls from project model automatically
+
+
+</p>
+<br />
+
+<p>
+    V0.4.4 Scope index page: size of text reduced. <br />
+    Create Netsuite entry: manufacturer is now a dropdown list, order has been changed
+
+</p>
+<br />
+
+<p>
+    V0.4.3 New Scope: Added new fields for project name, and hidden fields tied to project.  <br />
+    adding a new scope now creates a new project that is not assigned and has a priority of new. <br />
+
+</p>
+<br />
+<p>
+    V0.4.2 Completed project index: added a button to reach this page and return to the home page <br />
+    removed excess code and did general fixes to the page.
+</p>
+<div>
+    <br />
+    <p>
+        V0.4.1 Migration to ASP.NET core version 3.0 completed<br />
+        home card: Edit for priority now functions correctly.<br />
+        Project view: changes made in backround C# to account for changes in new version<br />
+        whole project: on create pages and edit pages priority can no longer be null, it breaks search function on main page<br />
+
+
+    </p>
+    <br />
+    <p>
+        V0.4.0 New Scope: Lead ID now generates the next numerical lead id when creating a new scope.<br />
+        Original scope chaged to text area.<br />
+        Date of request auto sets to the day the record is created.<br />
+        Project index:    project index page will no longer show completed projects.<br />
+        Project edit:     added Completed option to Priority.<br />
+        Edited list to display and enter properly with back end priority model<br />
+        Project Create:   added Completed option to Priority.<br />
+        Edited list to display and enter properly with back end priority model<br />
+        Completed Projects: Added new page that will only display completed projects. to reach this<br />
+        page append /completedindex to the URL when viewing the main project list.<br />
+        a button to view this will be implemented in further verisons, as well<br />
+        as the ability to toggle the project back to active.<br />
+        Netsuite pages:   added working links to the newly implemented netsuite section of the project card.<br />
+        add, edit, create, delete, and index pages added for Netsuite.<br />
+        Known bugs listed on bug report page
+    </p>
+    <br />
+    <p>
+        V0.3.8 Project list Create- when creating a new project the next lead number in sequence is automatically generated
+    </p>
+    <br />
+    <p>
+        V0.3.7 Project list- commit date color will only change text for dates past commit date<br />
+        Project List- removed lead id column and replaces "project card" text with lead number<br />
+        Edit/create pages- added new values for priority
+    </p>
+    <br />
+    <p>
+        V0.3.6 Project list/ project card home when creating or editing a project priority is now a dropdown list
+    </p>
+    <br />
+    <p>
+        V0.3.5 Propject list- added code so that the color of the commit date will be green if normal and red if past current date
+    </p>
+    <br />
+    <p>
+        V0.3.4 Scope and revisions- Made changes to the Scope model and the scope and revision page
+        <br /> as requested.
+        <br /> created a new tab on the home page that leads to a new scope creation page for salespeople.
+    </p>
+    <br />
+    <p>
+        V0.3.3 Project details & notes- on the details page there is now a button below the note section <br />
+        this links to the note page, the only link has been removed.
+
+    </p>
+    <br />
+    <p>
+        V0.3.2 Project details- Added in code to put the last note entered by date into the details page
+    </p>
+    <br />
+    <p>
+        V0.3.1 site wide- added security framework which allows registering an account and logging in
+        this currently does not restrict access based on role. <br />
+        index pages- corrected tables not showing up properly. <br />
+        Scope main page- corrected page not loading. <br />
+        database- added multiple tables and migrations for security features
+    </p>
+    <br />
+    <p>
+        V0.2.3 Scope and Revisions- major change to scope and revisions
+    </p>
+    <br />
+    <p>
+        V0.2.2 Sitewide- subbmissions forms are now functional <br />
+        project card- sorting now works properly and removes duplicates for priority and electrical lead
+    </p>
+    <br />
+    <p>
+        V0.2.1: Site wide- added Bug report page with known bugs and subbmission form that will send the error to Nick(non-functional) <br />
+        Site wide- added suggestion page where new suggestions can be made and submitted to nick(non-funcational)<br />
+        site wide- added a version history page that will display the past versions of the web site so the main page can remain uncluttered<br />
+        Scope and Revisions- Scope now leads to detail view which has an added Revisions button next to details <br />
+        Revisions- Revisions is now its own subset of the Scope page with its own create methods
+    </p>
+    <br />
+    <p>
+        V0.1.2: ProjectView index- table is now sortable by priority and EElead<br />
+        added clear on focus to drop downs
+    </p>
+    <br />
+    <p>
+        V0.1.1: projectview create- removed datestarted and Username.<br>
+        projectview create- Commit date is no longer mandatory<br>
+        Mainview- added changelog<br>
+        Mainview- changed welcome to raffel welcome
+    </p>
+</div>

@@ -1,0 +1,126 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectCard.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Projects</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Projects.LEAD_NUMBER" class="control-label"></label>
+                <input asp-for="Projects.LEAD_NUMBER" class="form-control"  value=@Model.LEAD readonly />
+                <span asp-validation-for="Projects.LEAD_NUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.PROJECT_NAME" class="control-label"></label>
+                <input asp-for="Projects.PROJECT_NAME" class="form-control" />
+                <span asp-validation-for="Projects.PROJECT_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.PART_NUMBER" class="control-label"></label>
+                <input asp-for="Projects.PART_NUMBER" class="form-control" />
+                <span asp-validation-for="Projects.PART_NUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               <!-- <label asp-for="Projects.DATE_STARTED" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.DATE_STARTED" />
+                <span asp-validation-for="Projects.DATE_STARTED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.PRIORITY"></label>
+                <select asp-for="Projects.PRIORITY" asp-items="Model.Priorities"></select>
+              <!--  <input asp-for="Projects.PRIORITY" class="form-control" />-->
+                <span asp-validation-for="Projects.PRIORITY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.CUSTOMER" class="control-label"></label>
+                <input asp-for="Projects.CUSTOMER" class="form-control" />
+                <span asp-validation-for="Projects.CUSTOMER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.DELIVERABLE" class="control-label"></label>
+                <input asp-for="Projects.DELIVERABLE" class="form-control" />
+                <span asp-validation-for="Projects.DELIVERABLE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.COMMIT_DATE" class="control-label"></label>
+                <input asp-for="Projects.COMMIT_DATE" class="form-control" />
+               <span asp-validation-for="Projects.COMMIT_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.EE_LEAD" class="control-label"></label>
+                <input asp-for="Projects.EE_LEAD" class="form-control" />
+                <span asp-validation-for="Projects.EE_LEAD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.ME_LEAD" class="control-label"></label>
+                <input asp-for="Projects.ME_LEAD" class="form-control" />
+                <span asp-validation-for="Projects.ME_LEAD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.ALPHA_DATE" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.ALPHA_DATE" />
+                <!-- <input asp-for="Projects.ALPHA_DATE" class="form-control" />-->
+                <!--<span asp-validation-for="Projects.ALPHA_DATE" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.BETA_DATE" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.BETA_DATE" />
+                <!--<input asp-for="Projects.BETA_DATE" class="form-control" />
+                <span asp-validation-for="Projects.BETA_DATE" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.FILES_TO_MANUFACTURE" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.FILES_TO_MANUFACTURE" />
+                <!--<input asp-for="Projects.FILES_TO_MANUFACTURE" class="form-control" />
+                <span asp-validation-for="Projects.FILES_TO_MANUFACTURE" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.PPAP_RCVD" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.PPAP_RCVD" />
+                <!--<input asp-for="Projects.PPAP_RCVD" class="form-control" />
+                <span asp-validation-for="Projects.PPAP_RCVD" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.TOOLING_RELEASED" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.TOOLING_RELEASED" />
+                <!--<input asp-for="Projects.TOOLING_RELEASED" class="form-control" />
+                <span asp-validation-for="Projects.TOOLING_RELEASED" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Projects.TOOLING_COMPLETE" class="control-label"></label>-->
+                <input type="hidden" asp-for="Projects.TOOLING_COMPLETE" />
+                <!--<input asp-for="Projects.TOOLING_COMPLETE" class="form-control" />
+                <span asp-validation-for="Projects.TOOLING_COMPLETE" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.SALESMAN" class="control-label"></label>
+                <select asp-for="Projects.SALESMAN"  asp-items="Model.SalesPeople" ></select>
+                <span asp-validation-for="Projects.SALESMAN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <!--  <label asp-for="Projects.USERNAME" class="control-label"></label>-->
+                    <input type="hidden" asp-for="Projects.USERNAME" />
+                  <!--  <span asp-validation-for="Projects.USERNAME" class="text-danger"></span>-->
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

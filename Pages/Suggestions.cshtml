@@ -1,0 +1,17 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.SuggestionsModel
+@using Microsoft.AspNetCore.Identity
+@using Raffel_Web.Areas.Identity.Data
+@inject SignInManager<Raffel_WebUser> SignInManager
+@inject UserManager<Raffel_WebUser> UserManager
+@{
+    ViewData["Title"] = "Suggestions";
+}
+
+<h1>Suggestions</h1>
+
+<form method="post">
+    <label asp-for="Message.Subject">Username</label> <input type="text" asp-for="Message.Subject" value=@UserManager.GetUserName(User) readonly/><br>
+    <textarea asp-for="Message.Body" rows="10" cols="80" placeholder="Write your suggestion here"></textarea><br>
+    <input type="submit" onclick="return alert('Thank you for your submission');" />
+</form>

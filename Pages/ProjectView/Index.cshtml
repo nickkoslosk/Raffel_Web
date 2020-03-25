@@ -1,0 +1,236 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectCard.IndexModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Project List";
+}
+
+<h1>Project List</h1>
+<p>
+    @*only allow managers and supervisors to see the create new project button*@
+    @if (ViewContext.HttpContext.User.IsInRole("Manager") || ViewContext.HttpContext.User.IsInRole("Supervisor") || ViewContext.HttpContext.User.IsInRole("Engineer"))
+    {
+    @*<a asp-route-nextLead="@Model.nextLead" asp-page="Create" class="btn btn-info btn-sm">Create New</a>*@
+    <a asp-page="/SalesSubmissions/Create" style="background-color: #C2DAE7;" class="btn btn-sm">Create New</a>
+    }
+    <a asp-page="./CompletedIndex" style="background-color: #C2DAE7;" class="btn btn-sm">Completed Projects</a>
+    <a asp-page="./Holdindex" style="background-color: #C2DAE7;" class="btn btn-sm">Projects on Hold</a>
+    <a asp-page="./GraveyardIndex" style="background-color: #C2DAE7;" class="btn btn-sm">Project Graveyard</a>
+</p>
+@*this form allows both search fields to submit at the same time allowing for the list to be filtered*@
+<form asp-page="./index" method="get" align="right">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input list="PrioritiesList" name="SearchString" onfocus="this.value=''" placeholder="Priority" AutoPostBack="true" />
+                    <datalist id="PrioritiesList">
+                        @Html.DropDownList("PrioritiesList", Model.PrioritiesList, "Priority")
+                    </datalist>
+                </th>
+                <th>
+                    <input list="EEList" name="eEString" onfocus="this.value=''" placeholder="Electrical Lead" AutoPostBack="true" />
+                    <datalist id="EEList">
+                        @Html.DropDownList("EEList", Model.EEList, "Electrical Lead")
+                    </datalist>
+                </th>
+                <th>
+                    <input list="CustList" name="custString" onfocus="this.value=''" placeholder="Customer" AutoPostBack="true" />
+                    <datalist id="CustList">
+                        @Html.DropDownList("CustList", Model.CustList, "Customer")
+                    </datalist>
+                </th>
+                <th>
+                    <input list="SalesList" name="salesString" onfocus="this.value=''" placeholder="Sales Person" AutoPostBack="true" />
+                    <datalist id="SalesList">
+                        @Html.DropDownList("SalesList", Model.SalesList, "Sales Person")
+                    </datalist>
+                </th>
+                <th>
+                        <button type="submit">submit/clear</button>
+                    
+                </th>
+            </tr>
+        </thead>
+    </table>
+</form>
+@*start index table*@
+<table class="table">
+    
+    <thead>
+        <tr>
+
+            <th nowrap> <a asp-action="Index" asp-route-sortOrder="@ViewData["LeadSort"]">Project Card  </a>                    </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProjectSort"]">@Html.DisplayNameFor(model => model.Projects[0].PROJECT_NAME)</a>
+            
+                @*@Html.DisplayNameFor(model => model.Projects[0].PROJECT_NAME)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["custSort"]">@Html.DisplayNameFor(model => model.Projects[0].CUSTOMER)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].CUSTOMER)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["partSort"]">@Html.DisplayNameFor(model => model.Projects[0].PART_NUMBER)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].PART_NUMBER)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["prioritySort"]">@Html.DisplayNameFor(model => model.Projects[0].PRIORITY)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].PRIORITY)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["deliverableSort"]">@Html.DisplayNameFor(model => model.Projects[0].DELIVERABLE)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].DELIVERABLE)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["commitSort"]">@Html.DisplayNameFor(model => model.Projects[0].COMMIT_DATE)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].COMMIT_DATE)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["eeSort"]">@Html.DisplayNameFor(model => model.Projects[0].EE_LEAD)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].EE_LEAD)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["meSort"]">@Html.DisplayNameFor(model => model.Projects[0].ME_LEAD)</a>
+                @* @Html.DisplayNameFor(model => model.Projects[0].ME_LEAD)*@
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["salesSort"]">@Html.DisplayNameFor(model => model.Projects[0].SALESMAN)</a>
+                @*@Html.DisplayNameFor(model => model.Projects[0].SALESMAN)*@
+            </th>
+
+            <th></th>
+            @if (ViewContext.HttpContext.User.IsInRole("Manager") || ViewContext.HttpContext.User.IsInRole("Supervisor"))
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Projects)
+        {
+
+        <tr>
+            @*the folloing allows a button with the lead number that links to each project detail card*@
+            <td>
+                <a asp-page="./ProjectCard/Home/Details" asp-route-LEAD_NUMBER="@item.LEAD_NUMBER"
+                   style="background-color: #C2DAE7;" class="btn btn-sm">@Html.DisplayFor(modelItem => item.LEAD_NUMBER)</a>
+
+                @{
+                    Model.currentNote = "";
+                    foreach (var noteItem in Model.Note)
+                    {
+                        {
+
+                            if (item.LEAD_NUMBER == noteItem.LEAD_NUMBER)
+                            {
+                                Model.currentNote = noteItem.NOTES;
+
+                            }
+
+                        }
+                    }
+                }
+                <!-- Trigger the modal with a button -->
+                <button type="button" style="background-color: #F1F3F5;" class="btn btn-sm" data-toggle="modal" data-target="@("#myModal" +@item.LEAD_NUMBER)">&nbsp;&nbsp;Notes&nbsp;&nbsp;</button>
+
+                <!-- Modal -->
+                <div id="@("myModal" +@item.LEAD_NUMBER)" class="modal fade" role="dialog">
+
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" float="left">Most Recent Note</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    @Model.currentNote
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROJECT_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUSTOMER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PART_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRIORITY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DELIVERABLE)
+            </td>
+            @*the following code block sets the color of the commit date to red if it is past the current date*@
+            @{
+                var dateColor = "";
+                var nullcheck = item.COMMIT_DATE;
+                var dt = item.COMMIT_DATE ?? DateTime.Now;
+                var result = DateTime.Compare(DateTime.Now, dt);
+            }
+            @if (nullcheck == null)
+            {
+                dateColor = "White";
+            }
+            else
+            {
+                @if (result < 1)
+                {
+                }
+                else
+                {
+                    dateColor = "color:Red";
+                }
+            }
+            <td style="@dateColor">
+                @Html.DisplayFor(modelItem => item.COMMIT_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EE_LEAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ME_LEAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SALESMAN)
+            </td>
+            <td>
+                @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+                {
+                    <a asp-page="/ProjectView/ProjectCard/Home/Edit" style="background-color: #D2EAD9;" asp-route-LEAD_NUMBER="@item.LEAD_NUMBER" class="btn btn-sm">&nbsp;&nbsp;Edit  &nbsp; </a>
+                }
+                @if (ViewContext.HttpContext.User.IsInRole("Manager") || ViewContext.HttpContext.User.IsInRole("Supervisor"))
+                {
+                    <a asp-page="./Delete" asp-route-id="@item.Id" style="background-color: #FEF2CD;" class="btn btn-sm">Delete</a>
+                }
+            </td>
+
+            @if (ViewContext.HttpContext.User.IsInRole("Manager") || ViewContext.HttpContext.User.IsInRole("Supervisor"))
+            {
+                <td>
+                    <a asp-page="/ProjectView/LeadNumber/Edit" asp-route-LEAD_NUMBER="@item.LEAD_NUMBER" style="background-color: #F1F3F5;" class="btn btn-sm">Change Lead</a>
+                </td>
+
+            }
+
+
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,86 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.NoteHistory.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Notes</h1>
+<p>
+    <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-secondary btn-sm">Home</a>
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        @if (Model.PN == "" || Model.PN == null)
+        {
+            <asp:button runat="server" class="btn btn-secondary btn-sm" onclick="return alert('You must have a part number');">Netsuite</asp:button>
+
+        }
+        else
+        {
+            <a asp-route-LEAD_NUMBER="@Model.LEAD" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+        }
+    }
+        <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-secondary btn-sm">Scope and Rev</a>
+        <!--   <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="/ProjectView/ProjectCard/NoteHistory/Index" class="btn btn-dark btn-outline-info btn-sm">Notes</a>-->
+    </p>
+
+<p>
+    @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+    {
+        <a asp-route-LEAD_NUMBER=@Model.LEAD asp-page="./Create" class="btn btn-info btn-sm">Create New</a>
+    }
+    </p>
+
+
+    @if (Model.Notes.Count() > 0)
+    {
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notes[0].ENTRY_DATE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notes[0].NOTE_CREATOR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Notes[0].NOTES)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Notes)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ENTRY_DATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOTE_CREATOR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOTES)
+                    </td>
+
+                    <td>
+                        @if (!ViewContext.HttpContext.User.IsInRole("FieldSales"))
+                            {
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm">Edit</a>
+                            }
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Details</a>
+                        @*  <a asp-page="./Delete" asp-route-id="@item.LEAD_NUMBER">Delete</a>*@ <!--MUST USE ID otherwise deletion will remove all records -->
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>
+            No Notes for this project yet
+        </p>
+    }

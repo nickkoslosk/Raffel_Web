@@ -1,0 +1,89 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.ScopeAndRev.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Scope</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Scope.Id" />
+            <input type="hidden" asp-for="Scope.LEAD_NUMBER" />
+
+            <div class="form-group">
+                <label asp-for="Scope.ORIGINAL_SCOPE" class="control-label"></label>
+                <input asp-for="Scope.ORIGINAL_SCOPE" class="form-control" />
+                <span asp-validation-for="Scope.ORIGINAL_SCOPE" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Scope.DATE_ENTERED" class="control-label"></label>
+                <input asp-for="Scope.DATE_ENTERED" class="form-control" />
+                <span asp-validation-for="Scope.DATE_ENTERED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CONNECTIONS" class="control-label"></label>
+                <input asp-for="Scope.CONNECTIONS" class="form-control" />
+                <span asp-validation-for="Scope.CONNECTIONS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.CUSTOMER_SCOPE" class="control-label"></label>
+                <input asp-for="Scope.CUSTOMER_SCOPE" class="form-control" />
+                <span asp-validation-for="Scope.CUSTOMER_SCOPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.DATE_NEEDED" class="control-label"></label>
+                <input asp-for="Scope.DATE_NEEDED" class="form-control" />
+                <span asp-validation-for="Scope.DATE_NEEDED" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.FIRST_DELIVERABLE" class="control-label"></label>
+                <select asp-for="Scope.FIRST_DELIVERABLE" asp-items="Model.deliverables"></select>
+                <span asp-validation-for="Scope.FIRST_DELIVERABLE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.PRODUCT_TYPE" class="control-label"></label>
+                <input asp-for="Scope.PRODUCT_TYPE" class="form-control" />
+                <span asp-validation-for="Scope.PRODUCT_TYPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.SIMILAR_TO" class="control-label"></label>
+                <input asp-for="Scope.SIMILAR_TO" class="form-control" />
+                <span asp-validation-for="Scope.SIMILAR_TO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.WHERE_SEND" class="control-label"></label>
+                <input asp-for="Scope.WHERE_SEND" class="form-control" />
+                <span asp-validation-for="Scope.WHERE_SEND" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.EAU" class="control-label"></label>
+                <input asp-for="Scope.EAU" class="form-control" />
+                <span asp-validation-for="Scope.EAU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scope.TARGET_PRICE" class="control-label"></label>
+                <input asp-for="Scope.TARGET_PRICE" class="form-control" />
+                <span asp-validation-for="Scope.TARGET_PRICE" class="text-danger"></span>
+            </div>
+ 
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Details" asp-route-LEAD_NUMBER="@Model.Scope.LEAD_NUMBER">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

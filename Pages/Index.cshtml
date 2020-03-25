@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+
+
+@section Head
+{
+    <style>
+        body {
+            background-image: url('/lib/bootstrap/dist/css/Images/landing page img.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+    </style>
+}
+<script type="text/javascript">
+    window.onload = function callButtonClickEvent() {
+            document.getElementById('menu-toggle').click();
+        }
+
+</script>

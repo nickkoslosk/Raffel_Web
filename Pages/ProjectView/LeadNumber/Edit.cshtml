@@ -1,0 +1,129 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.LeadNumber.EditModel
+@using Microsoft.AspNetCore.Identity
+@using Raffel_Web.Areas.Identity.Data
+@inject SignInManager<Raffel_WebUser> SignInManager
+@inject UserManager<Raffel_WebUser> UserManager
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Projects</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Projects.Id" />
+            <div class="form-group">
+                <label class="control-label">Current Lead Number: </label>
+                @Model.Projects.LEAD_NUMBER
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Projects.PROJECT_NAME" class="control-label"></label>
+                <input asp-for="Projects.PROJECT_NAME" class="form-control" />
+                <span asp-validation-for="Projects.PROJECT_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">New Lead Number</label>
+
+                <input id="projLead" asp-for="Projects.LEAD_NUMBER" class="form-control" />
+
+                <span asp-validation-for="Projects.LEAD_NUMBER" class="text-danger"></span>
+                @*hidden projects variables-----------------------------------*@
+                <input asp-for="Projects.LEAD_NUMBER" class="form-control" hidden />
+                <input asp-for="Projects.Id" class="form-control" hidden />
+                <input asp-for="Projects.PROJECT_NAME" class="form-control" hidden />
+                <input asp-for="Projects.PART_NUMBER" class="form-control" hidden />
+                <input asp-for="Projects.DATE_STARTED" class="form-control" hidden />
+                <input asp-for="Projects.PRIORITY" class="form-control" hidden />
+                <input asp-for="Projects.CUSTOMER" class="form-control" hidden />
+                <input asp-for="Projects.DELIVERABLE" class="form-control" hidden />
+                <input asp-for="Projects.EE_LEAD" class="form-control" hidden />
+                <input asp-for="Projects.ME_LEAD" class="form-control" hidden />
+                <input asp-for="Projects.ALPHA_DATE" class="form-control" hidden />
+                <input asp-for="Projects.BETA_DATE" class="form-control" hidden />
+                <input asp-for="Projects.FILES_TO_MANUFACTURE" class="form-control" hidden />
+                <input asp-for="Projects.PPAP_RCVD" class="form-control" hidden />
+                <input asp-for="Projects.TOOLING_RELEASED" class="form-control" hidden />
+                <input asp-for="Projects.TOOLING_COMPLETE" class="form-control" hidden />
+                <input asp-for="Projects.SALESMAN" class="form-control" hidden />
+            </div>
+            @{
+                int count = 0;
+                if (Model.Scope != null)
+                {
+                    <input asp-for="Scope.Id" class="form-control" hidden />
+                    @*  <input asp-for="Scope.LEAD_NUMBER" class="form-control"  value =  hidden />*@
+                    <input asp-for="Scope.ORIGINAL_SCOPE" class="form-control" hidden />
+                    <input asp-for="Scope.DATE_ENTERED" class="form-control" hidden />
+                    <input asp-for="Scope.CONNECTIONS" class="form-control" hidden />
+                    <input asp-for="Scope.CUSTOMER_SCOPE" class="form-control" hidden />
+                    <input asp-for="Scope.DATE_NEEDED" class="form-control" hidden />
+                    <input asp-for="Scope.FIRST_DELIVERABLE" class="form-control" hidden />
+                    <input asp-for="Scope.PRODUCT_TYPE" class="form-control" hidden />
+                    <input asp-for="Scope.SCOPE_ORIGINATOR" class="form-control" hidden />
+                    <input asp-for="Scope.SIMILAR_TO" class="form-control" hidden />
+                    <input asp-for="Scope.WHERE_SEND" class="form-control" hidden />
+                    <input asp-for="Scope.EAU" class="form-control" hidden />
+                    <input asp-for="Scope.TARGET_PRICE" class="form-control" hidden />
+                }
+                else
+                {
+                    <input asp-for="Scope.TARGET_PRICE" class="form-control" value="0" hidden />
+                    <input asp-for="Scope.EAU" class="form-control" value="0" hidden />
+                }
+                if (Model.Notes != null)
+                {
+                    count = 0;
+                    foreach (var item in Model.Notes)
+                    {
+                        <input asp-for="Notes[count].Id" class="form-control" hidden />
+                        @* <input asp-for="Notes[count].LEAD_NUMBER" class="form-control"  hidden />*@
+                        <input asp-for="Notes[count].ENTRY_DATE" class="form-control" hidden />
+                        <input asp-for="Notes[count].NOTES" class="form-control" hidden />
+                        <input asp-for="Notes[count].NOTE_CREATOR" class="form-control" hidden />
+                        count++;
+                    }
+                }
+                if (Model.Revisions != null)
+                {
+                    count = 0;
+                    foreach (var item in Model.Revisions)
+                    {
+                        <input asp-for="Revisions[count].Id" class="form-control" hidden />
+                        @*<input asp-for="Revisions[count].LEAD_NUMBER" class="form-control" hidden />*@
+                        <input asp-for="Revisions[count].DATE_ENTERED" class="form-control" hidden />
+                        <input asp-for="Revisions[count].REV_DETAILS" class="form-control" hidden />
+                        <input asp-for="Revisions[count].DATE_COMPLETE" class="form-control" hidden />
+                        <input asp-for="Revisions[count].COMPLETE_BY" class="form-control" hidden />
+                        <input asp-for="Revisions[count].ENTERED_BY" class="form-control" hidden />
+                        count++;
+                    }
+                }
+
+            }
+            <div class="form-group">
+                <label asp-for="Projects.USERNAME" class="control-label"></label>
+                <input asp-for="Projects.USERNAME" class="form-control" value=@UserManager.GetUserName(User) readonly />
+                <span asp-validation-for="Projects.USERNAME" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

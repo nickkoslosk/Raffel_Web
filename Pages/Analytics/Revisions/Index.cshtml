@@ -1,0 +1,69 @@
+﻿@page
+@model Raffel_Web.RevisionModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Open Revisions</h1>
+
+<p>
+
+    <a asp-page="/Analytics/Revenue/index" style="background-color: #C2DAE7;" class="btn btn-sm">Estimated Revenue</a>
+    <a asp-page="/Analytics/Revisions/index" style="background-color: #C2DAE7;" class="btn btn-dark btn-outline-info btn-sm">Open Revisions</a>
+    <a asp-page="/Analytics/Netsuite/index" style="background-color: #C2DAE7;" class="btn btn-sm">Open Netsuite Entries</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].LEAD_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].DATE_ENTERED)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].REV_DETAILS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].ENTERED_BY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].COMPLETE_BY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Revision[0].DATE_COMPLETE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Revision) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LEAD_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATE_ENTERED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.REV_DETAILS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ENTERED_BY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COMPLETE_BY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATE_COMPLETE)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

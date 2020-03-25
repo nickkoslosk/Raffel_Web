@@ -1,0 +1,44 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectView.ProjectCard.NoteHistory.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<p>
+    <a asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Home/Details" class="btn btn-secondary btn-sm">Home</a>
+    @if (Model.PN == ""|| Model.PN == null)
+    {
+        <asp:button runat="server" class="btn btn-secondary btn-sm" onclick="return alert('You must have a part number');">Netsuite</asp:button>
+
+    }
+    else
+    {
+        <a asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/Netsuite/Index" class="btn btn-secondary btn-sm">Netsuite</a>
+    }
+    <a asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/ScopeAndRev/Index" class="btn btn-secondary btn-sm">Scope and Rev</a>
+    <!--  <a asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" asp-page="/ProjectView/ProjectCard/NoteHistory/Index" class="btn btn-dark btn-outline-info btn-sm">Notes</a>-->
+</p>
+<div>
+    <h4>Notes</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Notes.ENTRY_DATE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Notes.ENTRY_DATE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Notes.NOTES)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Notes.NOTES)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" class="btn btn-success btn-sm">Edit</a>
+    <a asp-page="./Index"  asp-route-LEAD_NUMBER="@Model.Notes.LEAD_NUMBER" class="btn btn-primary btn-sm">Back to List</a>
+</div>

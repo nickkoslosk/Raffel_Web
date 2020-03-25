@@ -1,0 +1,102 @@
+﻿@page
+@model Raffel_Web.Pages.ProjectCard.holdModel
+
+@{
+    ViewData["Title"] = "On Hold Projects";
+}
+
+    <h1>On Hold Projects</h1>
+
+<p>
+    <a asp-page="./Index" class="btn btn-info btn-sm">Back to Current Projects</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th nowrap>Project Card </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects[0].PROJECT_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects[0].PART_NUMBER)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects[0].DELIVERABLE)
+            </th>
+            <th>
+                Put on Hold
+            </th>
+        
+            <th>
+                @* <form asp-page="./index" method="get">
+            <input list="EEList" name="eEString" onfocus="this.value=''" value="@Model.EEFilter" placeholder="Electrical Lead" />
+            <datalist id="EEList">
+                @Html.DropDownList("EEList", Model.EEList, "Electrical Lead")
+            </datalist>
+        </form> *@
+                @Html.DisplayNameFor(model => model.Projects[0].EE_LEAD)
+            </th>
+        <th>
+            @*@Html.DropDownList("MEList", Model.MEList, "Mechanical Lead")*@
+            @Html.DisplayNameFor(model => model.Projects[0].ME_LEAD)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Projects) {
+        <tr>
+            <td nowrap>
+
+                @Html.DisplayFor(modelItem => item.LEAD_NUMBER)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROJECT_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PART_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DELIVERABLE)
+            </td>
+            @{
+                var dateColor = "";
+                var nullcheck = item.COMMIT_DATE;
+                var dt = item.COMMIT_DATE ?? DateTime.Now;
+                var result = DateTime.Compare(DateTime.Now, dt);
+            }
+            @if(nullcheck == null){
+                dateColor="White";
+            }
+            else{
+            @if (result < 1)
+                {
+            @*dateColor="color:green";*@
+                }
+                else
+                {
+                    dateColor="color:Red";
+                }
+            }
+            @* <td style ="@dateColor" >*@
+            <td>
+                @Html.DisplayFor(modelItem => item.COMMIT_DATE)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EE_LEAD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ME_LEAD)
+            </td>
+
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm">Edit</a> @*change this button to change the priority back to regular*@
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

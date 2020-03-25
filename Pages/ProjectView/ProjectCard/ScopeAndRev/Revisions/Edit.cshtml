@@ -1,0 +1,60 @@
+﻿@page
+@model Raffel_Web.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Revision</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Revision.Id" />
+            <div class="form-group">
+                <label asp-for="Revision.LEAD_NUMBER" class="control-label"></label>
+                <input asp-for="Revision.LEAD_NUMBER" class="form-control" readonly />
+                <span asp-validation-for="Revision.LEAD_NUMBER" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Revision.DATE_ENTERED" class="control-label"></label>
+                <input asp-for="Revision.DATE_ENTERED" class="form-control" />
+                <span asp-validation-for="Revision.DATE_ENTERED" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Revision.REV_DETAILS" class="control-label"></label>
+                <input asp-for="Revision.REV_DETAILS" class="form-control" />
+                <span asp-validation-for="Revision.REV_DETAILS" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Revision.ENTERED_BY" class="control-label"></label>
+                <input asp-for="Revision.ENTERED_BY" class="form-control" />
+                <span asp-validation-for="Revision.ENTERED_BY" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Revision.COMPLETE_BY" class="control-label"></label>
+                <input asp-for="Revision.COMPLETE_BY" class="form-control" />
+                <span asp-validation-for="Revision.COMPLETE_BY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Revision.DATE_COMPLETE" class="control-label"></label>
+                <input asp-for="Revision.DATE_COMPLETE" class="form-control" />
+                <span asp-validation-for="Revision.DATE_COMPLETE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
